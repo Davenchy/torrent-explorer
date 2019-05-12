@@ -1,0 +1,28 @@
+{
+  "name": "torrent-explorer",
+  "version": "1.0.0",
+  "description": "torrent explorer and streamer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [
+    "server",
+    "torrent",
+    "api",
+    "client",
+    "explorer"
+  ],
+  "author": "Davenchy",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "pump": "^3.0.0",
+    "range-parser": "^1.2.1",
+    "read-torrent": "^1.3.1",
+    "torrent-stream": "^1.1.0"
+  }
+}
