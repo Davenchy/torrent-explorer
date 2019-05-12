@@ -1,7 +1,7 @@
 # Torrent Explorer
 
 - Torrent explorer and streamer
-- The real application from [here](https://github.com/asapach/peerflix-server)
+- The full project from [here](https://github.com/asapach/peerflix-server)
 
 ## HTTP API
 

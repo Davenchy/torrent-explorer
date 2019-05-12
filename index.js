@@ -35,28 +35,15 @@ app.get('/torrents/:infoHash/files', infoHashUtil, (req, res) => {
   req.connection.setTimeout(3600000);
 
   if (!range) {
-    console.log('no range');
     res.setHeader('Content-Length', file.length);
-    if (req.method === 'HEAD') {
-      console.log('head request');
-      return res.end();
-    }
-    console.log('pumping file');
-    return pump(file.createReadStream(), res);
+  } else {
+    res.statusCode = 206;
+    res.setHeader('Content-Length', range.end - range.start + 1);
+    res.setHeader('Content-Range', 'bytes ' + range.start + '-' + range.end + '/' + file.length);
   }
 
-  console.log('add range support');
-  res.statusCode = 206;
-  res.setHeader('Content-Length', range.end - range.start + 1);
-  res.setHeader('Content-Range', 'bytes ' + range.start + '-' + range.end + '/' + file.length);
-
-  if (req.method === 'HEAD') {
-    console.log('head request');
-    return res.end();
-  }
-  console.log('pumping file');
+  if (req.method === 'HEAD') return res.end();
   pump(file.createReadStream(range), res);
-
 });
 
 app.listen(PORT, () => console.log('listening on port', PORT));

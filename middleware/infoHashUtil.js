@@ -11,7 +11,7 @@ const infoHash = function (req, res, next) {
   };
 
   let torrent = store.get(infoHash);
-  if (!torrent) store.addInfoHash(infoHash, ready);
+  if (!torrent) store.add(infoHash, ready);
   else ready(torrent);
 }
 
@@ -24,6 +24,7 @@ function serialize(engine) {
   return {
     infoHash: engine.infoHash,
     name: torrent.name,
+    peers: engine.swarm.wires.length,
     length: torrent.length,
     ready: engine.ready,
     files: engine.files.map(f => serializeFile(f, engine))
