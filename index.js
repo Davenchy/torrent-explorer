@@ -26,6 +26,12 @@ app.get('/torrents/:infoHash/files', infoHashUtil, (req, res) => {
 
   file.select();
 
+  const killTorrent = () => file.deselect();
+
+  res.once('end', killTorrent);
+  res.once('close', killTorrent);
+  res.once('error', killTorrent);
+
   var range = req.headers.range;
   range = range && rangeParser(file.length, range)[0];
   res.setHeader('Accept-Ranges', 'bytes');
